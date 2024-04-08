@@ -1,0 +1,15 @@
+SET ProjectFolder TO $'''D:\\bands_bookings'''
+CALL read_config
+File.GetPathPart File: $'''D:/bookings/booking-venv/Lib/''' Directory=> Directory
+@@copilotGeneratedAction: 'False'
+Scripting.RunPowershellScript.RunPowershellScript Script: $'''%Config['venv']%
+cd %ProjectFolder%
+python main.py %StartDate% %EndDate%''' ScriptOutput=> PowershellOutput ScriptError=> ScriptError
+File.ReadTextFromFile.ReadText File: $'''%ProjectFolder%\\results.html''' Encoding: File.TextFileEncoding.UTF8 Content=> FileContents
+Outlook.Launch Instance=> OutlookInstance
+Outlook.SendEmailThroughOutlook.SendEmail Instance: OutlookInstance Account: Config['Email Sender'] SendTo: Config['Email Recipient'] Subject: Config['Email Subject'] Body: $'''%Config['Message']%
+<br />
+%FileContents%
+<br />
+%Config['Signature']%''' IsBodyHtml: True IsDraft: False
+File.Delete Files: $'''%ProjectFolder%/results.html'''

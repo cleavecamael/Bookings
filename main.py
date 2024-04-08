@@ -1,9 +1,7 @@
 
-
 # Application Default credentials are automatically created.
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+#import firebase_admin
+from firebase_admin import firestore,credentials,initialize_app
 from datetime import datetime, timedelta
 import pandas as pd
 import sys
@@ -32,7 +30,7 @@ def booking_to_html(file_path, docs):
 
     df = pd.DataFrame(data[1:], columns=data[0])
     #df.to_csv(file_path,)
-    df.to_html(file_path, index=False)
+    df.to_html(file_path,  index=False)
 
 def get_weekly_docs(db, start_date, end_date):
     return db.collection("bookings").where("start" ,">=", start_date).where("start", "<=", end_date).get()
@@ -45,7 +43,7 @@ if __name__ == "__main__":
 
     # Use a service account.
     cred = credentials.Certificate(PATH_TO_CERT)
-    app = firebase_admin.initialize_app(cred)
+    app = initialize_app(cred)
     db = firestore.client()
     docs = get_weekly_docs(db, start_filter_date,end_filter_date)
     booking_to_html("results.html", docs)

@@ -1,0 +1,14 @@
+Excel.LaunchExcel.LaunchAndOpen Path: $'''%ProjectFolder%\\Config.xlsx''' Visible: False ReadOnly: True LoadAddInsAndMacros: False Instance=> ExcelConfig
+SET Config TO {{ }}
+Excel.GetAllWorksheets Instance: ExcelConfig Worksheets=> ConfigSheetNames
+LOOP FOREACH CurrentSheet IN ConfigSheetNames
+    Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: ExcelConfig Name: CurrentSheet
+    Excel.GetFirstFreeColumnRow Instance: ExcelConfig FirstFreeColumn=> FirstFreeColumn FirstFreeRow=> FirstFreeRow
+    Excel.ReadFromExcel.ReadCells Instance: ExcelConfig StartColumn: $'''A''' StartRow: 2 EndColumn: $'''C''' EndRow: FirstFreeRow - 1 ReadAsText: False FirstLineIsHeader: False RangeValue=> SheetData
+    LOOP FOREACH CurrentItem IN SheetData
+        IF IsNotEmpty(CurrentItem[0]) THEN
+            SET Config[CurrentItem[0]] TO CurrentItem[1]
+        END
+    END
+END
+Excel.CloseExcel.Close Instance: ExcelConfig
