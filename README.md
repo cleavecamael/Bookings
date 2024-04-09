@@ -1,6 +1,6 @@
 # Bookings RPA Bot
 
-This bot reads a Firebase Firestore containing booking information and sends an email compiling the [bookings]() in a given date range.
+This bot reads a Firebase Firestore containing booking information and sends an email compiling the bookings in a given date range.
 
 ## Requirements
 
