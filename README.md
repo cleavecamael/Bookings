@@ -1,20 +1,20 @@
 # Bookings RPA Bot
 
-This bot reads a Firebase Firestore containing booking information and sends an email compiling the bookings in a given date range.
+This bot reads a Firebase Firestore containing booking information and sends an email compiling the [bookings]() in a given date range.
 
 ## Requirements
 
-The bot runs on Power Automate Desktop (PAD) (Windows required). If it's not installed, you can follow the instructions 
+The bot runs on Power Automate Desktop (PAD) (Windows required). If it's not installed, you can follow the instructions here:
 
-[here]: https://learn.microsoft.com/en-us/power-automate/desktop-flows/install
+[Install Power Automate](https://learn.microsoft.com/en-us/power-automate/desktop-flows/install)
 
 Microsoft Outlook is also required for this flow.
 
-You must already have a Firebase Firestore setup and service provider credentials (alternative authentication methods are okay, but main.py should be adjusted accordingly). Refer 
+You must already have a Firebase Firestore setup and service provider credentials (alternative authentication methods are okay, but main.py should be adjusted accordingly). Refer to this guide to setup cloud store and credentials:
 
-[here]: https://firebase.google.com/docs/firestore/quickstart
+[Firebase Quickstart]( https://firebase.google.com/docs/firestore/quickstart )
 
-to setup your Firestore and service provider credentials. The data should have a "start" timestamp field storing the booking start datetime and an "end" timestamp field storing the booking end datetime.
+The data should have a "start" timestamp field storing the booking start datetime and an "end" timestamp field storing the booking end datetime.
 
 ## Getting Started
 
